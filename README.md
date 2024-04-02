@@ -1,5 +1,7 @@
 # PASS IN
 
+![thumbnail](./.github/thumbnail.png)
+
 >> An app to handle event check-in's easily.
 
 O pass.in é uma aplicação de **gestão de participantes em eventos presenciais**.
@@ -33,7 +35,7 @@ O sistema fará um scan da credencial do participante para permitir a entrada no
 
 ## Especificações da API
 
-[Swagger UI](https://nlw-unite-nodejs.onrender.com/docs/static/index.html)
+[Swagger UI](./swagger.json)
 
 ## Banco de dados
 
@@ -41,4 +43,4 @@ Nessa aplicação vamos utilizar banco de dados relacional (SQL). Para ambiente 
 
 ### Diagrama ERD
 
-![erd.svg](./erd.svg)
+![erd.svg](./.github/erd.svg)

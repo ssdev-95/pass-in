@@ -3,14 +3,14 @@ from sqlalchemy.orm import sessionmaker
 
 from ...config import CONFIG
 
-class DbConnectionHandler:
+class __DbConnectionHandler:
     def __init__(self) -> None:
         self.__connection_string = '{}:///{}'.format(
             CONFIG['DB_DIALECT'],
             CONFIG['DB_URL']
         )
         self.__engine = None
-        self.__session = None
+        #self.session = None
 
     def connect_to_db(self):
         self.__engine = create_engine(self.__connection_string)
@@ -20,10 +20,11 @@ class DbConnectionHandler:
 
     def __enter__(self):
         session_maker = sessionmaker()
-        self.__session = session_maker(bind=self.__engine)
+        self.session = session_maker(bind=self.__engine)
         return self
 
-    def __exit__(self):
-        if self.__session is None:
-            return
-        self.__session.close()
+    def __exit__(self, exc_type, exc_value, exc_tb):
+        self.session.close()
+
+
+db_connection_handler = __DbConnectionHandler()

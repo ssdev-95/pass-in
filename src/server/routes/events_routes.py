@@ -1,6 +1,7 @@
 from flask import Blueprint, request
 
 from src.data.events_handler import EventsHandler
+from src.data.attendees_handler import AttendeesHandler
 from src.http_types.http_request import HTTPRequest
 
 events_routes_bp = Blueprint('events_routes', __name__)
@@ -14,7 +15,7 @@ def insert_event():
 
 
 @events_routes_bp.route('/events/<event_id>', methods=['GET'])
-def get_event_badge(event_id:str):
+def get_event_info(event_id:str):
     events_handler = EventsHandler()
     http_request = HTTPRequest(params={
         'event_id': event_id
@@ -30,5 +31,16 @@ def get_attendees_from_event(event_id:str):
     })
 
     http_response = events_handler.get_attendees_from_event(http_request)
+    return http_response.__json__(), http_response.status_code
+
+
+@events_routes_bp.route('/events/<event_id>/register', methods=['POST'])
+def join_an_event(event_id:str):
+    attendees_handler = AttendeesHandler()
+    http_request = HTTPRequest(
+        body=request.form,
+        params={ 'event_id': event_id }
+    )
+    http_response = attendees_handler.register_attendee(http_request)
     return http_response.__json__(), http_response.status_code
 

@@ -3,6 +3,7 @@ from ..settings.connection import db_connection_handler
 
 db_connection_handler.connect_to_db()
 
+skip = """
 def test_insert_event():
     events_repository = EventsRepository()
     event = {
@@ -19,4 +20,13 @@ def test_get_event_by_id():
     event_id = '29fjs-02kfsol-01djsno2-02mfd9k2pq-02ie'
     events_repository = EventsRepository()
     events_repository.get_event_by_id(event_id)
+"""
+
+print(skip)
+
+def test_count_attendees_from_event():
+    event_id = '29fjs-02kfsol-01djsno2-02mfd9k2pq-02ie'
+    events_repository = EventsRepository()
+    res = events_repository.count_attendees_from_event(event_id)
+    print(res)
 

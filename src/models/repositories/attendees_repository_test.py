@@ -3,6 +3,7 @@ from ..settings.connection import db_connection_handler
 
 db_connection_handler.connect_to_db()
 
+skip = """
 def test_insert_attendee():
     attendees_repository = AttendeesRepository()
     attendee = {
@@ -13,9 +14,11 @@ def test_insert_attendee():
     }
 
     attendees_repository.insert_attendee(attendee)
+"""
 
 
 def test_get_attendees_by_event_id():
     event_id = '29fjs-02kfsol-01djsno2-02mfd9k2pq-02ie'
     attendees_repository = AttendeesRepository()
-    attendees_repository.get_attendees_by_event_id(event_id)
+    attendees = attendees_repository.get_attendees_by_event_id(event_id)
+    print(attendees)

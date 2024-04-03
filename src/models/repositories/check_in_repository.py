@@ -1,3 +1,5 @@
+from sqlalchemy.exc import IntegrityError
+
 from ..settings.connection import db_connection_handler
 from ..entities.check_in import CheckIn
 

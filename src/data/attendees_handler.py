@@ -3,11 +3,13 @@ from uuid import uuid4
 from src.http_types.http_request import HTTPRequest
 from src.http_types.http_response import HTTPResponse
 from src.models.repositories.attendees_repository import AttendeesRepository
+from src.models.repositories.check_in_repository import CheckInRepository
 
 
 class AttendeesHandler:
     def __init__(self) -> None:
         self.__attendees_repository = AttendeesRepository()
+        self.__check_in_repository = CheckInRepository()
 
     def register_attendee(self, http_request:HTTPRequest) -> HTTPResponse:
         attendee_info = http_request.body
@@ -27,3 +29,8 @@ class AttendeesHandler:
         return HTTPResponse(
             body={ 'badge': badge }
         )
+
+    def handle_check_in(self, http_request:HTTPRequest) -> HTTPResponse:
+        attendee_id = str(http_request.params.get('attendee_id'))
+        check_in = self.__check_in_repository.handle_check_in(attendeeee_id)
+        return HTTPResponse(body={}, status_code=201)

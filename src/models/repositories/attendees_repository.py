@@ -1,5 +1,5 @@
 from typing import Dict
-from sqlalchemy.exc import IntegrityError
+from sqlalchemy.exc import IntegrityError, NoResultFound
 
 from ..settings.connection import db_connection_handler
 from ..entities.attendee import Attendee
@@ -25,4 +25,11 @@ class AttendeesRepository:
                 raise err
     def get_attendees_by_event_id(self, event_id:str):
         with db_connection_handler as db:
-            return db.session.query(Attendee).filter(Attendee.event_id==event_id).all()
+            try:
+                attendee = db.session.query(Attendee).filter(Attendee.event_id==event_id).all()
+                return attendee
+            except NoResultFound:
+                raise Exception(f'[ERROR] · Attendee Not Found In Event <{event_id}>')
+            except Exception as err:
+                print(f'[ERROR] · {err}')
+                raise err

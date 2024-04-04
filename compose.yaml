@@ -1,13 +1,15 @@
 services:
   app:
     build: .
+    depends_on:
+      - test
     env_file:
       - .env
     environment:
       - DB_URL=${DB_URL}
       - DB_DIALECT=${DB_DIALECT}
     ports:
-      - "3001:3001"
+      - "4000:4000"
     command: python3 app.py
   test:
     build: .
@@ -16,6 +18,4 @@ services:
     environment:
       - DB_URL=${DB_URL}
       - DB_DIALECT=${DB_DIALECT}
-    ports:
-      - "3001:3001"
     command: pytest -s -v

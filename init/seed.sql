@@ -1,10 +1,13 @@
-
 CREATE TABLE "tb_events" (
     "id" TEXT NOT NULL PRIMARY KEY,
     "title" TEXT NOT NULL,
     "details" TEXT,
     "slug" TEXT NOT NULL,
-    "maximum_attendees" INTEGER
+    "maximum_attendees" INTEGER,
+		"start_date" DATETIME NOT NULL,
+		"end_date" DATETIME NOT NULL,
+		CONSTRAINT "events_cannot_lie_in_the_past" CHECK ("start_date" > CURRENT_TIMESTAMP)
+		CONSTRAINT "events_cannot_lie_in_the_past" CHECK ("end_date" > "start_date")
 );
 
 CREATE TABLE "tb_attendees" (

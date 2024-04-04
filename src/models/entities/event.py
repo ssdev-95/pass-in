@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String
+from sqlalchemy import Column, Integer, String, DateTime
 
 from ..settings.base import Base
 
@@ -10,6 +10,6 @@ class Event(Base):
     slug = Column(String)
     details = Column(String, nullable=False)
     maximum_attendees = Column(Integer)
+    start_date = Column(DateTime, nullable=False)
+    end_date = Column(DateTime, nullable=False)
 
-    #def __repr__(self) -> str:
-    #   return f'Event [title={self.title}, slug={self.slug}, max_attendees={self.maximum_attendees}]'

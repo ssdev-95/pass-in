@@ -2,6 +2,10 @@ from typing import Dict
 from uuid import uuid4
 from sqlalchemy.exc import IntegrityError, NoResultFound
 
+from src.exceptions.exception_types.http_bad_request import HTTPBadRequestException
+from src.exceptions.exception_types.http_conflict import HTTPConflictException
+from src.exceptions.exception_types.http_not_found import HTTPNotFoundException
+
 from src.models.settings.connection import db_connection_handler
 from src.models.entities.attendee import Attendee
 from src.models.entities.check_in import CheckIn
@@ -22,10 +26,10 @@ class AttendeesRepository:
                 db.session.commit()
                 return attendee_info
             except IntegrityError:
-                raise Exception('[ERROR] · Failed To Save Attendee')
+                raise HTTPConflictException('[ERROR] · Failed To Save Attendee')
             except Exception as err:
                 db.session.rollback()
-                raise err
+                raise HTTPBadRequestException(f'{err}')
 
     def get_attendees_by_event_id(self, event_id:str):
         attendees = []
@@ -56,10 +60,10 @@ class AttendeesRepository:
 
                 return attendees
             except NoResultFound:
-                raise Exception(f'[ERROR] · Attendee Not Found In Event <{event_id}>')
+                raise HTTPNotFoundException(f'[ERROR] · Attendee Not Found In Event <{event_id}>')
             except Exception as err:
                 print(f'[ERROR] · {err}')
-                raise err
+                raise HTTPBadRequestException(f'{err}')
 
     def get_attendee_badge_by_id(self, attendee_id:str)->Dict:
         with db_connection_handler as db:
@@ -83,4 +87,4 @@ class AttendeesRepository:
                     'checkInURL': f'/attendees/{attendee_id}/check-in'
                 }
             except Exception as err:
-                raise err
+                raise HTTPBadRequestException(f'{err}')

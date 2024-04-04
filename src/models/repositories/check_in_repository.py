@@ -1,7 +1,12 @@
 from sqlalchemy.exc import IntegrityError
 
-from ..settings.connection import db_connection_handler
-from ..entities.check_in import CheckIn
+
+
+from src.exceptions.exception_types.http_bad_request import HTTPBadRequestException
+from src.exceptions.exception_types.http_conflict import HTTPConflictException
+
+from src.models.settings.connection import db_connection_handler
+from src.models.entities.check_in import CheckIn
 
 class CheckInRepository:
     def handle_check_in(self, attendee_id:str)->CheckIn:
@@ -15,7 +20,7 @@ class CheckInRepository:
                 db.session.commit()
                 return check_in
             except IntegrityError:
-                raise Exception('[ERROR] · Failed To CheckIn In Event')
+                raise HTTPConflictException('[ERROR] · Failed To CheckIn In Event')
             except Exception as err:
                 db.session.rollback()
-                raise err
+                raise HTTPBadRequestException(f'{err}')

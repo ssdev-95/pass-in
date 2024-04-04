@@ -2,6 +2,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
 from src.config import CONFIG
+from .base import Base
 
 class __DbConnectionHandler:
     def __init__(self) -> None:
@@ -13,6 +14,7 @@ class __DbConnectionHandler:
 
     def connect_to_db(self):
         self.__engine = create_engine(self.__connection_string)
+        Base.metadata.create_all(bind=self.__engine)
 
     def get_engine(self):
         return self.__engine

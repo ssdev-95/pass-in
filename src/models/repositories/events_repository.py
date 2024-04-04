@@ -1,5 +1,4 @@
 from typing import Dict
-from uuid import uuid4
 from sqlalchemy import func
 from sqlalchemy.exc import IntegrityError, NoResultFound
 
@@ -12,7 +11,7 @@ class EventsRepository:
         with db_connection_handler as db:
             try:
                 event = Event(
-                    id=str(uuid4()),
+                    id=event_info.get('uuid'),
                     title=event_info.get('title'),
                     details=event_info.get('details'),
                     slug=event_info.get('slug'),

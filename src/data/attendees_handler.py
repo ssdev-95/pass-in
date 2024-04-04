@@ -1,3 +1,5 @@
+from uuid import uuid4
+
 from src.http_types.http_request import HTTPRequest
 from src.http_types.http_response import HTTPResponse
 from src.models.repositories.attendees_repository import AttendeesRepository
@@ -12,6 +14,7 @@ class AttendeesHandler:
     def register_attendee(self, http_request:HTTPRequest) -> HTTPResponse:
         attendee_info = http_request.body
         attendee_info['event_id'] = str(http_request.params.get('event_id'))
+        attendee_info['uuid'] = str(uuid4())
         attendee = self.__attendees_repository.insert_attendee(attendee_info)
 
         return HTTPResponse(

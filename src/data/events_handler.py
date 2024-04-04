@@ -1,3 +1,5 @@
+from uuid import uuid4
+
 from src.http_types.http_request import HTTPRequest
 from src.http_types.http_response import HTTPResponse
 from src.models.repositories.events_repository import EventsRepository
@@ -10,6 +12,7 @@ class EventsHandler:
 
     def create_event(self, http_request:HTTPRequest)->HTTPResponse:
         event_info = http_request.body
+        event_info['uuid'] = str(uuid4())
         event = self.__events_repository.insert_event(event_info)
 
         return HTTPResponse(

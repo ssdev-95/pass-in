@@ -1,5 +1,4 @@
 from typing import Dict
-from uuid import uuid4
 from sqlalchemy.exc import IntegrityError, NoResultFound
 
 from src.exceptions.exception_types.http_bad_request import HTTPBadRequestException
@@ -16,7 +15,7 @@ class AttendeesRepository:
         with db_connection_handler as db:
             try:
                 attendee = Attendee(
-                    id=str(uuid4()),
+                    id=attendee_info.get('uuid'),
                     name=attendee_info.get('name'),
                     email=attendee_info.get('email'),
                     event_id=attendee_info.get('event_id')

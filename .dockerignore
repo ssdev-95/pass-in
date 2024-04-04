@@ -97,3 +97,5 @@ dmypy.json
 .pytype/
 
 storage.db
+init/seed.sql
+init/swagger.json

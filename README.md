@@ -21,21 +21,28 @@ O sistema fará um scan da credencial do participante para permitir a entrada no
 - [X]  O organizador deve poder visualizar a lista de participantes;
 - [X]  O participante deve poder se inscrever em um evento;
 - [x]  O participante deve poder visualizar seu crachá de inscrição;
-- [ ]  O participante deve poder realizar check-in no evento;
+- [X]  O participante deve poder realizar check-in no evento;
 
 ### Regras de negócio
 
+- [X]  O organizador não pode cadastrar um evento com data de inicio no passado;
+- [X]  O organizador não pode cadastrar um evento com data de término anterior a data de início;
+- [X]  O organizador não pode cadastrar um evento onde as datas de início e término são as mesmas;
 - [X]  O participante só pode se inscrever em um evento uma única vez;
-- [ ]  O participante só pode se inscrever em eventos com vagas disponíveis;
-- [ ]  O participante só pode realizar check-in em um evento uma única vez;
+- [X]  O participante só pode se inscrever em eventos com vagas disponíveis;
+- [X]  O participante só pode realizar check-in em um evento uma única vez;
+- [X]  O participante não pode realizar check-in em eventos passados;
+
 
 ### Requisitos não-funcionais
 
 - [ ]  O check-in no evento será realizado através de um QRCode;
+- [X]  Containerizar a aplicação;
+- [ ]  Realizar o deploy da aplicação;
 
 ## Especificações da API
 
-[Swagger UI](./swagger.json)
+[Swagger UI](./init/swagger.json)
 
 ## Banco de dados
 

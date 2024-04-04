@@ -7,7 +7,7 @@ class CheckInRepository:
     def handle_check_in(self, attendee_id:str)->CheckIn:
         with db_connection_handler as db:
             try:
-                check_in  = CheckIn(
+                check_in = CheckIn(
                     attendee_id = attendee_id
                 )
 

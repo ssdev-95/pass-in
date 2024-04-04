@@ -1,7 +1,7 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
-from ...config import CONFIG
+from src.config import CONFIG
 
 class __DbConnectionHandler:
     def __init__(self) -> None:
@@ -10,7 +10,6 @@ class __DbConnectionHandler:
             CONFIG['DB_URL']
         )
         self.__engine = None
-        #self.session = None
 
     def connect_to_db(self):
         self.__engine = create_engine(self.__connection_string)

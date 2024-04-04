@@ -1,17 +1,18 @@
 from typing import Dict
+from uuid import uuid4
 from sqlalchemy import func
 from sqlalchemy.exc import IntegrityError, NoResultFound
 
-from ..settings.connection import db_connection_handler
-from ..entities.event import Event
-from ..entities.attendee import Attendee
+from src.models.settings.connection import db_connection_handler
+from src.models.entities.event import Event
+from src.models.entities.attendee import Attendee
 
 class EventsRepository:
     def insert_event(self, event_info:Dict):
         with db_connection_handler as db:
             try:
                 event = Event(
-                    id=event_info.get('uuid'),
+                    id=str(uuid4()),
                     title=event_info.get('title'),
                     details=event_info.get('details'),
                     slug=event_info.get('slug'),
@@ -37,6 +38,7 @@ class EventsRepository:
             except Exception as err:
                 print(f'[ERROR] · {err}')
                 raise err
+
     def count_attendees_from_event(self, event_id:str):
         with db_connection_handler as db:
             try:

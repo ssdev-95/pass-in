@@ -10,5 +10,3 @@ class CheckIn(Base):
     attendee_id = Column(String, ForeignKey('tb_attendees.id'))
     created_at = Column(DateTime, nullable=False, default=func.now())
 
-    #def __repr__(self) -> str:
-    #    return f'CheckIn [attendee={self.attendee_id}, created_at={self.created_at}]'

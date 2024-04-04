@@ -12,5 +12,3 @@ class Attendee(Base):
     event_id = Column(String, ForeignKey('tb_events.id'))
     created_at = Column(DateTime, default=func.now())
 
-    #def __repr__(self) -> str:
-    #    return f'Attendee [name={self.name}, email={self.email}, event_id={self.event_id}, created_at={self.created_at}]'

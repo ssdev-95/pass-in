@@ -1,5 +1,3 @@
-from uuid import uuid4
-
 from src.http_types.http_request import HTTPRequest
 from src.http_types.http_response import HTTPResponse
 from src.models.repositories.attendees_repository import AttendeesRepository
@@ -13,9 +11,7 @@ class AttendeesHandler:
 
     def register_attendee(self, http_request:HTTPRequest) -> HTTPResponse:
         attendee_info = http_request.body
-        attendee_info['uuid'] = str(uuid4())
         attendee_info['event_id'] = str(http_request.params.get('event_id'))
-
         attendee = self.__attendees_repository.insert_attendee(attendee_info)
 
         return HTTPResponse(
@@ -32,5 +28,5 @@ class AttendeesHandler:
 
     def handle_check_in(self, http_request:HTTPRequest) -> HTTPResponse:
         attendee_id = str(http_request.params.get('attendee_id'))
-        check_in = self.__check_in_repository.handle_check_in(attendeeee_id)
+        self.__check_in_repository.handle_check_in(attendee_id)
         return HTTPResponse(body={}, status_code=201)

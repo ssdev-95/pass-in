@@ -33,7 +33,7 @@ def create_bulk_event_mocks(quantity=10):
 def create_bulk_attendees_mocks(event_id, quantity=10):
     mocks = []
     for mock in range(quantity):
-        mocks.append(create_bulk_attendees_mocks(event_id, mock))
+        mocks.append(create_attendee_mock(event_id, mock))
     return mocks
 
 mock_event = create_event_mock()

@@ -1,10 +1,6 @@
 services:
   app:
     build: .
-    depends_on:
-      - test
-    env_file:
-      - .env
     environment:
       - DB_URL=${DB_URL}
       - DB_DIALECT=${DB_DIALECT}
@@ -13,8 +9,6 @@ services:
     command: python3 app.py
   test:
     build: .
-    env_file:
-      - .env
     environment:
       - DB_URL=${DB_URL}
       - DB_DIALECT=${DB_DIALECT}

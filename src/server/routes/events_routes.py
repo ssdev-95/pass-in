@@ -6,9 +6,9 @@ from src.http_types.http_request import HTTPRequest
 
 from src.exceptions.exceptions_handler import exceptions_handler
 
-events_routes_bp = Blueprint('events_routes', __name__)
+blueprint = Blueprint('events_routes', __name__)
 
-@events_routes_bp.route('/events', methods=['POST'])
+@blueprint.route('/events', methods=['POST'])
 def insert_event():
     try:
         events_handler = EventsHandler()
@@ -20,7 +20,7 @@ def insert_event():
         return http_response.__json__(), http_response.status_code
 
 
-@events_routes_bp.route('/events/<event_id>', methods=['GET'])
+@blueprint.route('/events/<event_id>', methods=['GET'])
 def get_event_info(event_id:str):
     try:
         events_handler = EventsHandler()
@@ -33,7 +33,7 @@ def get_event_info(event_id:str):
         http_response = exceptions_handler(err)
         return http_response.__json__(), http_response.status_code
 
-@events_routes_bp.route('/events/<event_id>/attendees', methods=['GET'])
+@blueprint.route('/events/<event_id>/attendees', methods=['GET'])
 def get_attendees_from_event(event_id:str):
     try:
         events_handler = EventsHandler()
@@ -47,7 +47,7 @@ def get_attendees_from_event(event_id:str):
         http_response = exceptions_handler(err)
         return http_response.__json__(), http_response.status_code
 
-@events_routes_bp.route('/events/<event_id>/register', methods=['POST'])
+@blueprint.route('/events/<event_id>/register', methods=['POST'])
 def join_an_event(event_id:str):
     try:
         attendees_handler = AttendeesHandler()

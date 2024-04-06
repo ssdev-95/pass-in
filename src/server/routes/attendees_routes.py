@@ -4,9 +4,9 @@ from src.data.attendees_handler import AttendeesHandler
 from src.http_types.http_request import HTTPRequest
 from src.exceptions.exceptions_handler import exceptions_handler
 
-attendees_routes_bp = Blueprint('attendees_routes', __name__)
+blueprint = Blueprint('attendees_routes', __name__)
 
-@attendees_routes_bp.route('/attendees/<attendee_id>/check_in', methods=['POST'])
+@blueprint.route('/attendees/<attendee_id>/check_in', methods=['POST'])
 def check_in(attendee_id:int):
     try:
         attendees_handler = AttendeesHandler()
@@ -20,7 +20,7 @@ def check_in(attendee_id:int):
         http_response = exceptions_handler(err)
         return http_response.__json__(), http_response.status_code
 
-@attendees_routes_bp.route('/attendees/<attendee_id>/badge', methods=['GET'])
+@blueprint.route('/attendees/<attendee_id>/badge', methods=['GET'])
 def get_event_attendee_badge(attendee_id:int):
     try:
         attendees_handler = AttendeesHandler()

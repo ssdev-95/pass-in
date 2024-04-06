@@ -1,5 +1,4 @@
 from datetime import datetime
-import re
 from uuid import uuid4
 from src.exceptions.exception_types.http_not_found import HTTPNotFoundException
 
@@ -29,7 +28,6 @@ class AttendeesHandler:
         attendee_info = http_request.body
         attendee_info['event_id'] = event_id
         attendee_info['uuid'] = str(uuid4())
-        attendee_info['slug'] = re.sub('[^A-Z]', '', attendee_info['title'], 0, re.IGNORECASE)
         attendee = self.__attendees_repository.insert_attendee(attendee_info)
 
         attendees_count = self.__events_repository.count_attendees_from_event(attendee_info['event_id'])

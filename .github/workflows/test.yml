@@ -25,6 +25,6 @@ jobs:
 
       - name: Run tests
         env:
-          DB_DIALECT=${{ secrets.DB_DIALECT }}
-          DB_URL=${{ secrets.DB_URL }}
+          DB_DIALECT: ${{ secrets.DB_DIALECT }}
+          DB_URL: ${{ secrets.DB_URL }}
         run: pytest -s -v

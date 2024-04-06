@@ -14,5 +14,4 @@ def test_insert_attendee():
 def test_get_attendees_by_event_id():
     event_id = mock_event_uuid
     attendees_repository = AttendeesRepository()
-    attendees = attendees_repository.get_attendees_by_event_id(event_id)
-    print(attendees)
+    attendees = attendees_repository.get_attendees_by_event_id(f'{event_id}')

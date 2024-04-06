@@ -80,9 +80,9 @@ class AttendeesRepository:
                 )
 
                 return {
-                    'name': attendee[0].get('name'),
-                    'email': attendee[0].get('email'),
-                    'eventTitle': attendee[0].get('title'),
+                    'name': attendee[0],
+                    'email': attendee[1],
+                    'eventTitle': attendee[2],
                     'checkInURL': f'/attendees/{attendee_id}/check-in'
                 }
             except Exception as err:

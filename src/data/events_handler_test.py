@@ -18,17 +18,14 @@ def test_create_event():
 
     global event_id
     event_id = http_response.body.get('eventId')
-    print(event_id)
 
 
 def test_find_by_id():
-    print(event_id)
     http_request = HTTPRequest(params={'event_id':event_id})
     events_handler.find_by_id(http_request)
 
 
 def test_get_attendees_from_event():
-    print(event_id)
     attendees_handler = AttendeesHandler()
 
     for attendee in attendees_mocks:
